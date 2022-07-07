@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+{% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css-files/loginForm.css' %}" />
+  <link rel="icon" href="{% static 'images/images.jpg' %}">
+  <script src="{% static 'js-files/jquery-3.6.0.js' %}"></script>
+  <script src="{% static 'js-files/login.js' %}"></script>
+
+<body>
+  <form action="HomePage" class="dark" method="POST">
+    {% csrf_token %}
+    <div class="message" id="pass"></div>
+    <div class="message" id="error"></div>
+    <h3 class="text">User Login</h3>
+    <label class="text" for="email">E-mail:</label>
+    <p></p>
+    <input class="fields" id="email" type="email" name="email" required />
+    <p></p>
+    <label class="text" for="pass">Password:</label>
+    <p></p>
+    <input class="fields" id="password" type="password" name="password" minlength="4" required />
+    <p></p>
+    <button class="button" type="submit" value="Submit">
+      Sign In
+    </button>
+    <p style="font-weight:900">If You don't have an Account <a style="color: rgb(220,20,60)" href="{% url 'CreateAccount' %}">Create Account</a></p>
+  </form>
+  
+  {% if account %}
+  <script>
+      $(document).ready(
+          function(){
+              $("#pass").html("Account Created Successfully!");
+              $("#pass").css({"background-color": "rgba(0, 255, 0, .2)", "border-color":"green", "display":"block", "font-size":"18"});
+          }
+      );
+  </script>
+    {% elif not ok %}
+    <script>
+        $(document).ready(
+            function(){
+                $("#error").html("Email or Password is Incorrect!");
+                $("#error").css({"background-color": "rgba(255, 0, 0, .4)", "border-color":"red", "display":"block", "font-size":"18"});
+            }
+        );
+    </script>
+    {% endif %}
+</body>
+
+</html>

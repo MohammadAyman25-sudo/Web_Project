@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if num == 1 %}
+<script>
+$(document).ready(
+    function(){
+        $("#pass").html("department assigned successfully");
+        $("#pass").css({"background-color": "rgba(0, 255, 0, .2)", "border-color":"green", "display":"block", "font-size":"18"});
+    }
+);
+</script>
+{% endif %}
+
+{% if num == 2 %}
+<script>
+  $(document).ready(
+        function(){
+            $("#error").html("no such name or id.\n also make sure that the desired student is active");
+            $("#error").css({"background-color": "rgba(255, 0, 0, .4)", "border-color":"red", "display":"block", "font-size":"18"});
+        }
+    );
+</script>
+{% endif %}
+{% if num == 4 %}
+<script>
+$(document).ready(
+        function(){
+            $("#error").html("search bar can't be empty");
+            $("#error").css({"background-color": "rgba(255, 0, 0, .4)", "border-color":"red", "display":"block", "font-size":"18"});
+        }
+    );
+</script>
+{% endif %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Mohammad Ayman" />
+    <title>Search for students</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css-files/search.css' %}" />
+
+    <script src="{%  static 'js-files/search.js' %}"></script>
+  </head>
+  <body>
+    <fieldset class="h">
+        <div class="message" id="pass"></div>
+      <div class="message" id="error"></div>
+      <h1>find student data</h1>
+      <form action="getSt" method="POST">
+        {% csrf_token %}
+        <div id="search-via">
+          <strong>Search via:</strong>
+          <select id="Search_select" name="select" onchange="change()">
+            <option value=""></option>
+            <option value="id" >ID</option>
+            <option value="name" >Name</option>
+          </select>
+        </div>
+        <div class="nz">
+          <b id="para">Enter:</b>
+          <input type="search" id="ser" name="search" disabled/>
+          <button type="submit" id="but" disabled>
+            <img src="{% static 'images/search.jpg' %}" />
+          </button>
+        </div>
+      </form>
+    </fieldset>
+  </body>
+</html>
+{% endblock content %}

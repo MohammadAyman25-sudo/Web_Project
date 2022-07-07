@@ -1,0 +1,23 @@
+{% load static %}
+  <link rel="stylesheet" href="{%  static 'css-files/navbar.css' %}">
+  <link rel="icon" href="{% static 'images/images.jpg' %}">
+  <script src="{% static 'js-files/jquery-3.6.0.js' %}"></script>
+  <script src="{% static 'js-files/navbar.js' %}"></script>
+<section>
+    <form method="POST" action="log_out" id="form">
+        {% csrf_token %}
+        <input type="hidden" name="uname" value="{{ userName }}" id="post">
+    </form>
+    <nav class="nav">
+      <a id="homePageIcon" class="title" onclick="Login_form('homePageIcon')" href="/" style="color: crimson;">Student Affairs</a>
+      <a id="homePage" class="links" onclick="Login_form('homePage')" href="/">Home</a>
+      <a id="active_inactive" class="links" href="{% url 'active-inactive' %}" onclick="Login_form('active_inactive')">Active-Inactive Students</a>
+      <a id="search" class="links" onclick="Login_form('search')" href="{% url 'search' %}">Search</a>
+      <a id="add" class="links" onclick="Login_form('add')" href="{% url 'addStudentPage' %}">Add Student</a>
+      <a class="links" style="float:right;margin-right:30px;" onclick="postForm()" href="{% url 'loginScreen' %}" id="login">{{ lname }}</a>
+      <a id="userName" class="text" style="float:right;color:white;margin-right:auto;">{{ userName }}</a>
+      <a id="Greetings" class="text" style="float:right;color:white;margin-right:auto;"></a>
+    </nav>
+  </section>
+{% block content %}
+{% endblock content %}

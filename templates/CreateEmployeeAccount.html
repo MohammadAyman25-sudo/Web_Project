@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+{% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css-files/SignUpForm.css' %}" />
+  <link rel="icon" href="{% static 'images/images.jpg' %}">
+  <script src="{% static 'js-files/jquery-3.6.0.js' %}"></script>
+  <script src="{% static 'js-files/login.js' %}"></script>
+
+<body>
+  <form action="check_new_Account" class="dark" method="POST">
+    <div class="message" id="error"></div>
+    {% csrf_token %}
+    <h3 class="text">Employee Sign Up</h3>
+    <label class="text" for="name">User name:</label>
+    <p></p>
+    <input class="fields" id="User_name" type="text" name="User_name" required/>
+    <p></p>
+    <label class="text" for="email">E-mail:</label>
+    <p></p>
+    <input class="fields" id="email" type="email" name="email" required />
+    <p></p>
+    <label class="text" for="pass">Password:</label>
+    <p></p>
+    <input class="fields" id="password" type="password" name="password" minlength="4" />
+    <p></p>
+    <label class="text" for="pass">Confirm Password:</label>
+    <p></p>
+    <input class="fields" id="password" type="password" name="Confirmpassword" minlength="4" />
+    <p></p>
+    <button class="button" type="submit" value="Submit">
+      Sign Up
+    </button>
+    <p style="font-weight:900;">If you already have an Account <a style="color:rgb(220,20,60)" href="{% url 'loginScreen' %}">log in</a></p>
+  </form>
+{% if exists == True %}
+<script>
+$(document).ready(
+    function(){
+        $("#error").html("This mail already exists!");
+        $("#error").css({"background-color": "rgba(255, 0, 0, .4)", "border-color":"red", "display":"block", "font-size":"18"});
+        $("#User_name").val("{{ User_name }}");
+        $("#email").val("{{ email }}");
+    }
+);
+</script>
+{% endif %}
+
+{% if correctPass == False %}
+<script>
+    $(document).ready(
+        function(){
+            $("#error").html("Passwords doesn't match");
+            $("#error").css({"background-color": "rgba(255, 0, 0, .4)", "border-color":"red", "display":"block", "font-size":"18"});
+            $("#User_name").val("{{ User_name }}");
+            $("#email").val("{{ email }}");
+        }
+    );
+</script>
+{% endif %}
+
+{% if correctUser == False %}
+<script>
+    $(document).ready(
+        function(){
+            $("#error").html("Username is not valid");
+            $("#error").css({"background-color": "rgba(255, 0, 0, .4)", "border-color":"red", "display":"block", "font-size":"18"});
+            $("#User_name").val("{{ User_name }}");
+            $("#email").val("{{ email }}");
+        }
+    );
+</script>
+{% endif %}
+
+{% if uniqueUser == False %}
+<script>
+    $(document).ready(
+        function(){
+            $("#error").html("This Username already exists");
+            $("#error").css({"background-color": "rgba(255, 0, 0, .4)", "border-color":"red", "display":"block", "font-size":"18"});
+            $("#User_name").val("{{ User_name }}");
+            $("#email").val("{{ email }}");
+        }
+    );
+</script>
+{% endif %}
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+.nav {
+    min-width: 100%;
+    background-color: rgb(35, 29, 29);
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    font-weight: 700;
+    padding: 18px;
+    text-align: left;
+    position: fixed;
+    top: 0%;
+    right: 0%;
+    left: 0%;
+    
+  }
+
+  .nav a:hover {
+    text-decoration: none;
+    color: crimson;
+    cursor: hand;
+  }
+  
+  .nav.text{
+      color: white;
+      float: right;
+      
+  }
+
+.nav.text:hover{
+    color:white;
+}
+  

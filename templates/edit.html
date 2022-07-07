@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% if not ok and ok != None %}
+    <script>
+        $(document).ready(
+            function(){
+                $("#error").html("You Can't change the ID of the student");
+                $("#error").css({"background-color": "rgba(255, 0, 0, .4)", "border-color":"red", "display":"block", "font-size":"18"});
+            }
+        );
+    </script>
+{% endif %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css-files/editForm.css' %}" />
+    <script src="{% static 'js-files/edit.js' %}"></script>
+  </head>
+
+  <body>
+    <div class="dark">
+      <div class="text heading">
+      <div id="error"></div> 
+        <label>edit student data</label>
+      </div>
+
+
+      <form action="update" method="POST" onsubmit="return confirm('are you sure?');">
+        {% csrf_token %}
+        <div>
+          <label class="text" for="name">Name</label><br />
+          <input
+            type="text"
+            class="fields"
+            id="name"
+            name="name"
+            value="{{ student.name }}"
+          />
+        </div>
+        <br />
+        <div>
+          <label class="text" for="num">ID</label><br />
+          <input
+          min="20000000"
+          max="99999999"
+            type="number"
+            class="fields"
+            id="num"
+            value="{{ student.ID }}"
+            name="id"
+          />
+        </div>
+        <br />
+        <div>
+          <label class="text" for="birth">Date of birth</label><br />
+          <input
+            class="fields"
+            type="date"
+            id="birth"
+            name="date"
+            value="{{ student.birth }}"
+          />
+        </div>
+        <br />
+        <div>
+          <label class="text" for="gpa">GPA</label><br />
+          <input
+          min="0"
+          max="4"
+            type="number"
+            class="fields"
+            id="gpa"
+            name="gpa"
+            step="0.01"
+            value="{{ student.gpa }}"
+          />
+        </div>
+        <br />
+        <div class="text">
+          Gender :
+          <label>Male</label>
+          <input id="male" type="radio" class="{{ student.male }}" name="gender" value="male" checked/>
+          <label>Female</label>
+          <input id="female" type="radio" class="{{ student.female }}" name="gender" value="female" />
+        </div>
+        <br />
+        <div class="text">
+          <label for="level">Select your level: </label>
+          <select name="level" class="text fields" id="level" size="{{ student.level }}">
+            <option value="First Level">First Level</option>
+            <option value="Second Level">Second Level</option>
+            <option value="Third Level">Third Level</option>
+            <option value="Fourth Level">Fourth Level</option>
+          </select>
+        </div>
+        <br />
+        <div class="text">
+          Status :
+          <label for="active">Active</label>
+          <input id="active" type="radio" name="status" class="{{ student.active }}" value="active" checked/>
+          <label for="inactive">Inactive</label>
+          <input id="inactive" type="radio" name="status" class="{{ student.inactive }}" value="inactive" />
+        </div>
+        <br />
+        <div class="text">
+          <label for="department">Select your department: </label>
+          <select name="department" class="fields" id="department" size="{{ student.dep }}">
+            <option value="general">General</option>
+            <option value="cs">CS</option>
+            <option value="it">IT</option>
+            <option value="is">IS</option>
+            <option value="ai">AI</option>
+          </select>
+        </div>
+        <br />
+        <div>
+          <label class="text" for="Email">Email</label><br />
+          <input
+            type="email"
+            class="fields"
+            id="Email"
+            value="{{ student.mail }}"
+            name="email"
+          />
+        </div>
+        <br />
+        <div>
+          <label class="text" for="phone">Mobile number</label><br />
+          <input
+            type="text"
+            class="fields"
+            id="phone"
+            value="{{ student.phone }}"
+            name="phone"
+          />
+        </div>
+        <br>
+        <div class="buttons">
+          <button class="button" id="update" type="submit" name="update" >save</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
+{% endblock content %}
